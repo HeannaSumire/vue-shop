@@ -1,35 +1,19 @@
-# vue-rabbit-demo
+# 本项目为vue3开发的电商平台项目，后台数据和接口来自小兔鲜电商平台项目
 
-This template should help get you started developing with Vue 3 in Vite.
+## 技术栈
 
-## Recommended IDE Setup
+- vue3+pinia+vite
+- pinia作为全局状态管理
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 项目页面结构
 
-## Customize configuration
+### 1.Layout 主页
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- 包含头部、导航、吸顶导航、尾部、HOME主页内容
+- HOME作为二级导航包含：左侧分类和轮播图、新鲜好物、人气推荐、产品列表
 
-## Project Setup
+### 项目难点+解决
 
-```sh
-npm install
-```
+- 对相似模块进行组件封装。解决：把可能发生变化的部分抽象成组件参数（props/插槽）。主标题和副标题是纯文本，抽象为prop传入；主体内容是复杂的模板，抽象成插槽传入。
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- 使用懒加载进行性能优化。解决：
