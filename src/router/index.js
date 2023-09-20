@@ -11,22 +11,22 @@ const router = createRouter({
   //path和component对应关系的位置
   routes: [
     {
-      path:'/',
+      path: '/',
       component: Layout,
-      children:[
+      children: [
         {
           // 默认二级路由
-          path:'',
-          component:Home
+          path: '',
+          component: Home
         },
         {
-          path:'category',
-          component:Category
+          path: 'category/:id',
+          component: Category
         }
       ]
     },
     {
-      path:'/login',
+      path: '/login',
       component: Login
     }
   ]
