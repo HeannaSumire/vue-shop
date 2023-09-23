@@ -1,17 +1,30 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+const userStore = useUserStore()
+const router = useRouter()
+
+const confirm = () => {
+  //退出登录业务
+  userStore.clearUserInfo()
+  router.push('/login')
+}
+</script>
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <template v-if="true">
+        <!-- 多模板渲染 区分登录状态和非登录状态 是否有token -->
+        <template v-if="userStore.userInfo.token">
           <li>
-            <a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a>
+            <a href="javascript:;"><i class="iconfont icon-user"></i>Me</a>
           </li>
           <li>
             <el-popconfirm
               title="确认退出吗？"
               confirm-button-text="确认"
               cancel-button-text="取消"
+              @confirm="confirm"
             >
               <template #reference><a href="javascript:;">退出登录</a></template>
             </el-popconfirm>
@@ -20,7 +33,8 @@
           <li><a href="javascript:;">会员中心</a></li>
         </template>
         <template v-else>
-          <li><a href="javascript:;">请先登录</a></li>
+          <li><a href="javascript:;" @click="$router.push('/login')">请先登录</a></li>
+          <!-- 在 Vue 中，以 $ 开头的变量通常是全局对象或实例的属性和方法。Vue 实例的属性和方法会以 $ 开头，以示它们属于 Vue 实例 -->
           <li><a href="javascript:;">帮助中心</a></li>
           <li><a href="javascript:;">关于我们</a></li>
         </template>
