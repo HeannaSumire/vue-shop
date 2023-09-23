@@ -8,6 +8,11 @@ const getNewList = async () => {
   newList.value = res.result
 }
 onMounted(() => getNewList())
+
+// const firsta = document.querySelector('a')
+// const as = document.querySelectorAll('a')
+// const aTags = document.getElementsByTagName('p')
+// console.log(as, aTags, firsta)
 </script>
 
 <template>
