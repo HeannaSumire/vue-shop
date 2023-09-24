@@ -3,7 +3,10 @@ import DetailHot from './components/DetailHot.vue'
 import { getDetail } from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { useCartStore } from '@/stores/cartStore'
 
+const cartStore = useCartStore()
 const goods = ref({})
 const route = useRoute()
 const getGoods = async () => {
@@ -13,14 +16,36 @@ const getGoods = async () => {
 }
 onMounted(() => getGoods())
 
+// sku规格被操作时
+let skuObj = {}
 const skuChange = (sku) => {
-  console.log(sku)
+  skuObj = sku
 }
 
-// count
+// 商品计数
 const count = ref(1)
 const countChange = (count) => {
   console.log(count)
+}
+
+// 添加购物车
+const addCart = () => {
+  if (skuObj.skuId) {
+    // 规格已经选择  触发action
+    cartStore.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      price: goods.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      attrsText: skuObj.specsText,
+      selected: true
+    })
+  } else {
+    // 规格没有选择 提示用户
+    ElMessage.warning('请选择规格')
+  }
 }
 </script>
 
@@ -41,7 +66,7 @@ const countChange = (count) => {
           <el-breadcrumb-item :to="{ path: `/category/sub/${goods.categories[0].id}` }"
             >{{ goods.categories[0].name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ goods.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->

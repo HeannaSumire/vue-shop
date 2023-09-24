@@ -21,7 +21,7 @@
 </template>
 <script setup>
 import { useScroll } from '@vueuse/core'
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/categoryStore'
 const { y } = useScroll(window)
 
 //使用pinia中的数据
