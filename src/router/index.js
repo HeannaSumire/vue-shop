@@ -9,6 +9,9 @@ import CartList from '@/views/CartList/index.vue'
 import Checkout from '@/views/Checkout/index.vue'
 import Pay from '@/views/Pay/index.vue'
 import PayBack from '@/views/Pay/PayBack.vue'
+import Member from '@/views/Member/index.vue'
+import UserInfo from '@/views/Member/components/UserInfo.vue'
+import UserOrder from '@/views/Member/components/UserOrder.vue'
 
 //createRouter: 创建router实例对象
 //createWebHistory: 创建history模式路由
@@ -54,6 +57,20 @@ const router = createRouter({
         {
           path: 'paycallback',
           component: PayBack
+        },
+        {
+          path: 'member',
+          component: Member,
+          children: [
+            {
+              path: '',
+              component: UserInfo
+            },
+            {
+              path: 'order',
+              component: UserOrder
+            }
+          ]
         }
       ]
     },
